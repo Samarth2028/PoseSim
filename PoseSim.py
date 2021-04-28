@@ -1,6 +1,3 @@
-import cv2
-import csv
-import os
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -418,11 +415,11 @@ def runBatchMode():
         input_image,test_image = load_images("./images/"+i, "./uimages/"+uimages[0])
         input_pose, input_img, input_conf = estimatePose(input_image)
         test_pose, test_img, test_conf = estimatePose(test_image)
-        print("Similarity score without Cropping Transformation:")
+        print("*****************************Similarity score without Cropping and Scaling Transformation****************************************************************")
         Cos1, wei1 = similarity_score(input_pose,test_pose,input_conf)
         Cosine1.append(Cos1)
         Weight1.append(wei1)
-        print("Visualization of pose skeletons matched after Resizing and cropping transformation")
+        print("*************************Similarity score with Cropping and ScalingTransformation***********************************")
         cr_pose1,cr_pose2 = resize_and_crop(input_pose,test_pose)
         cr_tuple_pose1  = tuple(map(tuple,cr_pose1))
         cr_tuple_pose2  = tuple(map(tuple,cr_pose2))
@@ -463,12 +460,12 @@ def runSingleCompareMode(input_img_path,test_img_path):
     test_pose, test_img, test_conf = estimatePose(test_image)
     drawPoseOnImage(input_pose,input_img,'Input_image.jpg')
     drawPoseOnImage(test_pose,test_img,'Test_Image.jpg')
-    print("Similarity score without Cropping Transformation:")
+    print("*****************************Similarity score without Cropping and Scaling Transformation****************************************************************")
     Cos1, wei1 = similarity_score(input_pose,test_pose,input_conf)
+    print("Cosine Similarity:",Cos1);
+    print("Weighted Similarity:",wei1);
     drawSkeletonsTogether(input_pose,test_pose,input_image.shape,'Camparision_Before_Cropping.jpg')
-    Cosine1.append(Cos1)
-    Weight1.append(wei1)
-    print("Visualization of pose skeletons matched after Resizing and cropping transformation")
+    print("*************************Similarity score with Cropping and ScalingTransformation***********************************")
     cr_pose1,cr_pose2 = resize_and_crop(input_pose,test_pose)
     cr_tuple_pose1  = tuple(map(tuple,cr_pose1))
     cr_tuple_pose2  = tuple(map(tuple,cr_pose2))
@@ -479,8 +476,8 @@ def runSingleCompareMode(input_img_path,test_img_path):
     dim = (Xmax,Ymax,3)
     drawSkeletonsTogether(cr_tuple_pose1,cr_tuple_pose2,dim,'Comparision_after_cropping.jpg')
     Cos2, wei2 = similarity_score(cr_pose1,cr_pose2,input_conf)
-    Cosine2.append(Cos2)
-    Weight2.append(wei2)
+    print("Cosine Similarity:",Cos1);
+    print("Weighted Similarity:",wei1);
 
 
 
