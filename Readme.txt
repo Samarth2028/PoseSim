@@ -1,7 +1,7 @@
 # PoseSim
 805 Project on Pose Similarity Estimation
 Project Directory Structure:
-
+Note: pose/mpi folder here does not contain the pre-trained openpose .caffemodel due to file size upload contrainsts.
 \---PoseSimilarity
     |   Camparision_Before_Cropping.jpg : 
 		image with pose skelotons visualized together after scaling and cropping
